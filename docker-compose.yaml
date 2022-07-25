@@ -1,0 +1,47 @@
+# Este arquivo está configurado para levantar um abiente completo para o PROJETO UGPE...
+# ao executar o comando a baixo sobe os seguintes aplicativos(containers):
+# MYSQL, WORDPRESS, NEXTJS APP, PHPMYADMIN e PORTAINER
+# BASTA EXECUTAR: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+# PARA BAIXAR SERVIÇOS, EXECUTAR: docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
+version: '3.9'
+
+services:
+
+  # SQLServer DATABASE
+  sql_server_db:
+    container_name: sql_server_db
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    restart: unless-stopped
+    tty: true
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: SQLServer@1
+      MSSQL_AGENT_ENABLED: "true"
+      #MSSQL_BACKUP_DIR: "/var/opt/sqlserver"
+      #MSSQL_DATA_DI: "/var/opt/sqlserver"
+      #MSSQL_LOG_DIR: "/var/opt/sqlserver"
+    ports:
+      - 1433:1433
+    volumes: 
+      #- ./volume:/var/opt/mssql
+      - sqlserver-volume:/var/opt/mssql
+    networks:
+      - sqlserver-network
+    security_opt:
+      - seccomp:unconfined
+    deploy:
+      resources:
+        limits:
+          cpus: '1.5'
+          memory: 4G
+        #reservations:
+        #  memory: 1G
+
+# NETWORDKS
+networks: 
+  sqlserver-network:
+    driver: bridge
+    name: sqlserver-network
+volumes:
+  sqlserver-volume:
+    name: sqlserver-volume
