@@ -1,8 +1,3 @@
-# Este arquivo está configurado para levantar um abiente completo para o PROJETO UGPE...
-# ao executar o comando a baixo sobe os seguintes aplicativos(containers):
-# MYSQL, WORDPRESS, NEXTJS APP, PHPMYADMIN e PORTAINER
-# BASTA EXECUTAR: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-# PARA BAIXAR SERVIÇOS, EXECUTAR: docker-compose -f docker-compose.yml -f docker-compose.prod.yml down
 version: '3.9'
 
 services:
