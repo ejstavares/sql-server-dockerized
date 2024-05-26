@@ -5,13 +5,14 @@ services:
   # SQLServer DATABASE
   sql_server_db:
     container_name: sql_server_db
-    image: mcr.microsoft.com/mssql/server:2017-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     restart: unless-stopped
     tty: true
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: SQLServer@1
       MSSQL_AGENT_ENABLED: "true"
+      TZ: "Atlantic/Cape_Verde" ### https://learn.microsoft.com/en-us/sql/linux/sql-server-linux-configure-time-zone?view=sql-server-ver16
       #MSSQL_BACKUP_DIR: "/var/opt/sqlserver"
       #MSSQL_DATA_DI: "/var/opt/sqlserver"
       #MSSQL_LOG_DIR: "/var/opt/sqlserver"
